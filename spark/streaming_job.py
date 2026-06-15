@@ -39,6 +39,15 @@ REDIS_HOST = "localhost"
 REDIS_PORT = 6379
 REDIS_TTL = 30  # seconds
 
+load_dotenv()
+REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379")
+
+redis_client = redis.from_url(
+    os.getenv("REDIS_URL", "redis://localhost:6379"),
+    decode_responses=True,
+    ssl_cert_reqs=None  # needed for Upstash TLS
+)
+
 ES_HOST = "http://localhost:9200"
 ES_INDEX = "ecommerce-events"
 
@@ -103,33 +112,25 @@ class RedisWriter:
     """Writes aggregated metrics to Redis hot cache"""
 
     def __init__(self):
-        self.client = redis.Redis(
-            host=REDIS_HOST,
-            port=REDIS_PORT,
-            decode_responses=True
+        # USE UPSTASH URL from .env instead of localhost
+        self.client = redis.from_url(
+            os.getenv("REDIS_URL", "redis://localhost:6379"),
+            decode_responses=True,
+            ssl_cert_reqs=None
         )
+        self.ttl = int(os.getenv("REDIS_TTL", 30))
 
     def write_metrics(self, metrics: dict):
-        """Write metrics to Redis with TTL"""
         try:
             for key, value in metrics.items():
                 self.client.setex(
                     f"dashboard:{key}",
-                    REDIS_TTL,
+                    self.ttl,
                     json.dumps(value)
                 )
             logger.info(f"⚡ Redis updated: {list(metrics.keys())}")
         except Exception as e:
             logger.warning(f"Redis write failed: {e}")
-
-    def get_metrics(self, key: str):
-        """Get metric from Redis"""
-        try:
-            val = self.client.get(f"dashboard:{key}")
-            return json.loads(val) if val else None
-        except Exception:
-            return None
-
 
 # ============================================
 # ELASTICSEARCH WRITER

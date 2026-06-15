@@ -21,9 +21,8 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-redis_client = redis.Redis(
-    host=os.getenv("REDIS_HOST", "localhost"),
-    port=int(os.getenv("REDIS_PORT", 6379)),
+redis_client = redis.from_url(
+    os.getenv("REDIS_URL"),
     decode_responses=True
 )
 
@@ -108,6 +107,13 @@ def health():
         "redis": redis_ok
     }
 
+@app.get("/debug")
+def debug():
+    return {
+        "host": os.getenv("REDIS_HOST"),
+        "port": os.getenv("REDIS_PORT"),
+        "password_exists": bool(os.getenv("REDIS_PASSWORD"))
+    }
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
