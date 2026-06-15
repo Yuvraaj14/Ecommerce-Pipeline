@@ -83,6 +83,12 @@ def get_summary():
         "last_updated": get_from_redis("last_updated")
     }
 
+@app.get("/")
+def root():
+    return {
+        "service": "ecommerce-metrics-api",
+        "status": "running"
+    }
 
 @app.get("/prometheus", response_class=PlainTextResponse)
 def prometheus_metrics():
