@@ -67,7 +67,7 @@ def get_events():
 
 @app.get("/metrics/countries")
 def get_countries():
-    return get_from_redis("country_breakdown")
+    return [get_from_redis("country_breakdown")]
 
 
 @app.get("/metrics/summary")
