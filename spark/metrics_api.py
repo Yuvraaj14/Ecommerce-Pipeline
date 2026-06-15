@@ -42,7 +42,7 @@ def get_from_redis(key: str):
 
 @app.get("/metrics/revenue")
 def get_revenue():
-    return get_from_redis("revenue")
+    return [get_from_redis("revenue")]
 
 
 @app.get("/metrics/funnel")
