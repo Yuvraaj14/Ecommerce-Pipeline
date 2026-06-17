@@ -21,7 +21,7 @@ fake = Faker()
 # ============================================
 # CONFIG
 # ============================================
-KAFKA_BOOTSTRAP_SERVERS = '127.0.0.1:9092'
+KAFKA_BOOTSTRAP_SERVERS = 'localhost:9092'
 TOPIC_NAME = 'ecommerce-events'
 EVENTS_PER_SECOND = 10
 

@@ -6,6 +6,12 @@ __pycache__/
 # Environment
 .env
 
+# Spark
+spark/checkpoints/
+
+# Grafana DB
+grafana.db
+
 # Hadoop / local binaries
 hadoop.dll
 winutils.exe
