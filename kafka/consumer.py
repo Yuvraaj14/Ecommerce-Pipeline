@@ -12,7 +12,7 @@ from datetime import datetime
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-KAFKA_BOOTSTRAP_SERVERS = 'localhost:9092'
+KAFKA_BOOTSTRAP_SERVERS = '127.0.0.1:9092'
 TOPIC_NAME = 'ecommerce-events'
 GROUP_ID = 'ecommerce-pipeline-group'
 

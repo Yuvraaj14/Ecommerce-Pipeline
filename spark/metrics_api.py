@@ -107,6 +107,11 @@ def health():
         "redis": redis_ok
     }
 
+@app.get("/redis-keys")
+def redis_keys():
+    return redis_client.keys("dashboard:*")
+
+
 @app.get("/debug")
 def debug():
     return {

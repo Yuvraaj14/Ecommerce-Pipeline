@@ -30,7 +30,7 @@ logger = logging.getLogger(__name__)
 # ============================================
 # CONFIG
 # ============================================
-KAFKA_BOOTSTRAP_SERVERS = "localhost:9092"
+KAFKA_BOOTSTRAP_SERVERS = '127.0.0.1:9092'
 KAFKA_TOPIC = "ecommerce-events"
 CHECKPOINT_DIR = os.path.join(os.getcwd(), "spark", "checkpoints").replace("\\", "/")
 BATCH_INTERVAL = "30 seconds"
