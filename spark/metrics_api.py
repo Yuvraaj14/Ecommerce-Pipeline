@@ -12,6 +12,11 @@ from fastapi.responses import PlainTextResponse
 import uvicorn
 import os
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 app = FastAPI(title="Pipeline Metrics API")
 
 app.add_middleware(
