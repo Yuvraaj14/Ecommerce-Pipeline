@@ -21,7 +21,7 @@ fake = Faker()
 # ============================================
 # CONFIG
 # ============================================
-KAFKA_BOOTSTRAP_SERVERS = 'localhost:9092'
+KAFKA_BOOTSTRAP_SERVERS = '127.0.0.1:9092'
 TOPIC_NAME = 'ecommerce-events'
 EVENTS_PER_SECOND = 10
 
@@ -93,8 +93,11 @@ def create_producer() -> KafkaProducer:
     """Create Kafka producer with JSON serialization"""
     producer = KafkaProducer(
         bootstrap_servers=KAFKA_BOOTSTRAP_SERVERS,
+        api_version=(3, 5, 0),
+
         value_serializer=lambda v: json.dumps(v).encode('utf-8'),
         key_serializer=lambda k: k.encode('utf-8') if k else None,
+
         acks='all',
         retries=3,
         max_in_flight_requests_per_connection=1
