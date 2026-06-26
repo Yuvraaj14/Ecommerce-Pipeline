@@ -17,7 +17,7 @@ class TestEventGeneration:
 
     def test_event_has_required_fields(self):
         """Generated events must have all required fields"""
-        from kafka.producer import generate_event
+        from streaming.producer import generate_event
 
         user_pool = ["user_001", "user_002", "user_003"]
         event = generate_event(user_pool)
@@ -33,7 +33,7 @@ class TestEventGeneration:
 
     def test_event_types_valid(self):
         """Event types must be from valid set"""
-        from kafka.producer import generate_event, EVENT_TYPES
+        from streaming.producer import generate_event, EVENT_TYPES
 
         user_pool = ["user_001"]
         for _ in range(50):
@@ -42,7 +42,7 @@ class TestEventGeneration:
 
     def test_purchase_has_revenue(self):
         """Purchase events must have positive revenue"""
-        from kafka.producer import generate_event
+        from streaming.producer import generate_event
 
         user_pool = ["user_001"]
         purchase_events = []
@@ -58,7 +58,7 @@ class TestEventGeneration:
 
     def test_non_purchase_zero_revenue(self):
         """Non-purchase events must have zero revenue"""
-        from kafka.producer import generate_event
+        from streaming.producer import generate_event
 
         user_pool = ["user_001"]
         for _ in range(50):
