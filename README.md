@@ -143,21 +143,13 @@ Real-time revenue, conversion funnel, device split, top countries, and top produ
 ## 🔄 dbt Transformation Lineage
 
 raw_events (PostgreSQL)
-
 │
-
 ├── stg_events (view)
-
 │       ├── conversion_funnel (table)
-
 │       └── user_segments (table)
-
 │
-
 └── stg_purchases (view)
-
 ├── revenue_by_category (table)
-
 └── top_products (table)
 
 **dbt Test Results:** 7/7 passing
@@ -255,73 +247,33 @@ KAFKA_TOPIC=ecommerce-events
 
 ```
 Ecommerce-Pipeline/
-
 ├── kafka/
-
 │   ├── producer.py              # Simulates 10 events/sec (500 users)
-
 │   └── consumer.py              # Kafka consumer
-
 ├── spark/
-
 │   ├── streaming_job.py         # PySpark structured streaming
-
 │   ├── streaming_job_simple.py  # Python micro-batch processor
-
 │   ├── metrics_api.py           # FastAPI metrics server
-
 │   ├── write_to_postgres.py     # Kafka → Supabase writer
-
 │   └── setup_db.py              # PostgreSQL table setup
-
 ├── ecommerce_dbt/
-
 │   ├── models/
-
 │   │   ├── staging/
-
 │   │   │   ├── stg_events.sql
-
 │   │   │   └── stg_purchases.sql
-
 │   │   └── marts/
-
 │   │       ├── conversion_funnel.sql
-
 │   │       ├── revenue_by_category.sql
-
 │   │       ├── top_products.sql
-
 │   │       └── user_segments.sql
-
 │   └── dbt_project.yml
-
 ├── monitoring/
-
 │   └── prometheus.yml
-
 ├── k8s/
-
 │   ├── kafka-deployment.yaml
-
 │   ├── spark-deployment.yaml
-
 │   └── metrics-api-deployment.yaml
-
-├── tests/
-
-│   └── test_pipeline.py
-
-├── .github/
-
-│   └── workflows/
-
-│       └── ci-cd.yml
-
 ├── docker-compose.yml
-
-├── Dockerfile
-
 └── requirements.txt
 ```
 
