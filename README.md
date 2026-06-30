@@ -142,6 +142,7 @@ Real-time revenue, conversion funnel, device split, top countries, and top produ
 
 ## 🔄 dbt Transformation Lineage
 
+```
 raw_events (PostgreSQL)
 │
 ├── stg_events (view)
@@ -156,6 +157,7 @@ raw_events (PostgreSQL)
 - ✅ unique event_id
 - ✅ not_null event_id, event_type, revenue
 - ✅ accepted_values for event_type
+```
 
 ---
 
