@@ -48,12 +48,20 @@ transforms with dbt, caches hot metrics in Redis, and visualizes on a live Grafa
 325,572 events indexed in Elasticsearch with full-text search.
 
 ### Grafana — Live Dashboard
-![Grafana Dashboard](screenshots/Grafana-Dashboard-1.png)(screenshots/Grafana-Dashboard-2.png)
-Real-time revenue, conversion funnel, device split, and top products — auto-refreshing every 10s.
+
+| Revenue, Orders & Funnel | Devices, Countries & Top Products |
+|:---:|:---:|
+| ![Grafana Dashboard 1](screenshots/Grafana-Dashboard-1.png) | ![Grafana Dashboard 2](screenshots/Grafana-Dashboard-2.png) |
+
+Real-time revenue, conversion funnel, device split, top countries, and top products — auto-refreshing every 10s.
 
 ### Upstash Redis — Hot Cache
-![Upstash Data Browser](screenshots/Upstash-Overview.png)(screenshots/Upstash-Data-Browser.png)
-8 dashboard keys with 30s TTL, serving the Grafana metrics API.
+
+| Data Browser | Database Details |
+|:---:|:---:|
+| ![Upstash Data Browser](screenshots/Upstash-Overview.png) | ![Upstash Details](screenshots/Upstash-Data-Browser.png) |
+
+8 dashboard keys with 30s TTL, serving the Grafana metrics API via FastAPI.
 
 ### Supabase — Data Warehouse
 ![Supabase Table Editor](screenshots/Supabase-Table.png)
