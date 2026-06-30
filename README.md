@@ -33,38 +33,35 @@ transforms with dbt, caches hot metrics in Redis, and visualizes on a live Grafa
 
 ## 🏗️ System Architecture
 
-```mermaid
-graph TB
-    subgraph "Ingestion"
-        A[E-Commerce Event\nSimulator] -->|10 events/sec| B[Apache Kafka\nTopic: ecommerce-events\n3 partitions]
-    end
+![Architecture](architecture.jpeg)
 
-    subgraph "Processing"
-        B --> C[PySpark Streaming\n30s micro-batches\nforeachBatch]
-        C --> D[Aggregations\nRevenue · Funnel\nDevices · Countries]
-    end
+---
 
-    subgraph "Storage"
-        D --> E[Elasticsearch\n325K+ events indexed\nKibana logs]
-        D --> F[Supabase PostgreSQL\n85K+ rows\nraw_events table]
-        D --> G[Upstash Redis\n8 dashboard keys\nTTL=30s hot cache]
-    end
+## 📸 Live Pipeline Screenshots
 
-    subgraph "Transformation"
-        F --> H[dbt Models\nstg_events · stg_purchases\nrevenue_by_category\nconversion_funnel\ntop_products · user_segments]
-    end
+### Kafka — Topic Overview
+![Kafka UI](screenshots/Kafka-UI.png)
+6,219 messages processed across the `ecommerce-events` topic.
 
-    subgraph "Serving"
-        G --> I[FastAPI Metrics API\nRender.com\n/metrics/summary]
-        I --> J[Grafana Dashboard\nReal-time panels\n10s auto-refresh]
-    end
+### Kibana — Indexed Events
+![Kibana Discover](screenshots/Kibana-Discover.png)
+325,572 events indexed in Elasticsearch with full-text search.
 
-    subgraph "Infrastructure"
-        K[Docker Compose\n7 containers]
-        L[Kubernetes YAMLs\nDeployment manifests]
-        M[GitHub Actions\nCI/CD pipeline]
-    end
-```
+### Grafana — Live Dashboard
+![Grafana Dashboard](screenshots/Grafana-Dashboard-1.png)(screenshots/Grafana-Dashboard-2.png)
+Real-time revenue, conversion funnel, device split, and top products — auto-refreshing every 10s.
+
+### Upstash Redis — Hot Cache
+![Upstash Data Browser](screenshots/Upstash-Overview.png)(screenshots/Upstash-Data-Browser.png)
+8 dashboard keys with 30s TTL, serving the Grafana metrics API.
+
+### Supabase — Data Warehouse
+![Supabase Table Editor](screenshots/Supabase-Table.png)
+85,900+ rows ingested into `raw_events` for dbt transformations.
+
+### dbt — Model Lineage
+![dbt Lineage Graph](screenshots/dbt-Lineage.png)
+6 models: 2 staging views feeding 4 mart tables (revenue, funnel, products, segments).
 
 ---
 
