@@ -49,7 +49,7 @@ transforms with dbt, caches hot metrics in Redis, and visualizes on a live Grafa
 
 ### Grafana — Live Dashboard
 
-| Revenue, Orders & Funnel | Devices, Countries & Top Products |
+| Revenue, Orders, Avg Order Value & Funnel | Devices, Event Types, Countries & Top Products |
 |:---:|:---:|
 | ![Grafana Dashboard 1](screenshots/Grafana-Dashboard-1.png) | ![Grafana Dashboard 2](screenshots/Grafana-Dashboard-2.png) |
 
@@ -57,7 +57,7 @@ Real-time revenue, conversion funnel, device split, top countries, and top produ
 
 ### Upstash Redis — Hot Cache
 
-| Data Browser | Database Details |
+| Database Details | Data Browser |
 |:---:|:---:|
 | ![Upstash Data Browser](screenshots/Upstash-Overview.png) | ![Upstash Details](screenshots/Upstash-Data-Browser.png) |
 
